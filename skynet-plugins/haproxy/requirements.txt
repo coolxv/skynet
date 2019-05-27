@@ -1,0 +1,4 @@
+six
+psutil
+httplib
+pyzmq==14.7.0

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <!-- DataTables CSS -->
+    <link href="{{ url_for('static', filename='DataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <!-- Page Heading -->
+        <div class="col-lg-12">
+            {% include 'main/warning/head_warning.html' %}
+        </div>
+
+
+        <!-- Page Body -->
+        <div class="col-lg-12">
+            {% include 'main/warning/body_warning.html' %}
+        </div>
+    </div>
+    <!-- /.row -->
+{% endblock %}
+
+
+{% block footer %}
+    <!-- DataTables -->
+    <script src="{{ url_for('static', filename='DataTables/media/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/jquery.form.js') }}"></script>
+    {% include 'main/warning/script.html' %}
+{% endblock %}
+

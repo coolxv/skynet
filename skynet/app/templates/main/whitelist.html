@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <!-- DataTables CSS -->
+    <link href="{{ url_for('static', filename='DataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='BootstrapValidator/css/bootstrapValidator.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='BootstrapFileinput/css/fileinput.min.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <!-- Page Heading -->
+        <div class="col-lg-12">
+            {% include 'main/whitelist/head_whitelist.html' %}
+        </div>
+
+        <!-- Page Button Add -->
+        <div  class="col-lg-12">
+            {% include 'main/whitelist/add_whitelist.html' %}
+            {% include 'main/whitelist/export_whitelist.html' %}
+            {% include 'main/whitelist/import_whitelist.html' %}
+        </div>
+
+        <!-- Page Body -->
+        <div class="col-lg-12">
+            {% include 'main/whitelist/body_whitelist.html' %}
+        </div>
+    </div>
+    <!-- /.row -->
+{% endblock %}
+
+
+{% block footer %}
+    <!-- DataTables -->
+    <script src="{{ url_for('static', filename='DataTables/media/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='BootstrapValidator/js/bootstrapValidator.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/jquery.form.js') }}"></script>
+    <script src="{{ url_for('static', filename='BootstrapFileinput/js/fileinput.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='BootstrapFileinput/js/fileinput_locale_zh.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/jquery.form.js') }}"></script>
+    {% include 'main/whitelist/script.html' %}
+
+{% endblock %}

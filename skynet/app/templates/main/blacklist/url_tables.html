@@ -1,0 +1,21 @@
+<thead>
+<tr>
+    <th>规则</th>
+    <th>匹配类型</th>
+    <th>描述</th>
+    <th>创建时间</th>
+    <th>操作</th>
+</tr>
+</thead>
+
+<tbody>
+{% for url_rule in url_rules %}
+    <tr>
+        <td>{{ url_rule.rule }}</td>
+        <td>{{ type[url_rule.type] }}</td>
+        <td>{{ description[url_rule.description] }}</td>
+        <td>{{ url_rule.ctime }}</td>
+        <td><button class="btn btn-link btn-xs center-block delete-rule" value="{{ url_rule.guid }}"><i class="fa fa-trash-o fa-lg"></i>&nbsp删除规则</button></td>
+    </tr>
+{% endfor %}
+</tbody>

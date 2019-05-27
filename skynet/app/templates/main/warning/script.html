@@ -1,0 +1,79 @@
+<script>
+    $(document).ready( function () {
+        var auto_warning_table = $('#auto_warning_tables').DataTable( {
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": true,
+                }],
+        });
+
+        var nonauto_warning_table = $('#nonauto_warning_tables').DataTable({
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": true,
+                },
+            ]
+        });
+        ////初始化页签
+        function getUrlParam(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r!=null) return unescape(r[2]); return null; //返回参数值
+        }
+        type = getUrlParam("category")
+        if(type != ""){
+            select = '.nav.nav-tabs a[href="#'+type+'"]';
+            $(select).tab('show')
+        }
+    } );
+
+    $(function() {
+        $(".send-acl").click(function () {
+            var guid = $(this).attr("value");
+            var req_url = "/api/v1/warning/" + guid + "/";
+            $.ajax({
+                type: "PUT",
+                contentType: "application/json; charset=utf-8",
+                url: req_url,
+                data: JSON.stringify({"guid": guid}),
+
+                success: function (msg) {
+                    if(msg.result == "failed"){
+                        alert("操作失败");
+                    }
+                    location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    {#                        alert(XMLHttpRequest.status);#}
+                    {#                        alert(XMLHttpRequest.readyState);#}
+                    alert("连接失败:"+textStatus);
+                },
+            });
+        });
+        $(".delete-warning").click(function () {
+            var guid = $(this).attr("value");
+            var req_url = "/api/v1/warning/" + guid + "/";
+            $.ajax({
+                type: "DELETE",
+                contentType: "application/json; charset=utf-8",
+                url: req_url,
+                data: JSON.stringify({"guid": guid}),
+                dataType: "json",
+                success: function (msg) {
+                    if(msg.result == "failed"){
+                        alert("操作失败");
+                    }
+                    location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    {#                        alert(XMLHttpRequest.status);#}
+                    {#                        alert(XMLHttpRequest.readyState);#}
+                    alert("连接失败:"+textStatus);
+                },
+            });
+        });
+    });
+</script>

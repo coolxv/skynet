@@ -1,0 +1,49 @@
+<!-- 按钮触发模态框 -->
+
+<button class="btn btn-primary btn-md  pull-right" id="addRuleButton" data-toggle="modal" data-target="#addRuleModal">添加白名单</button>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="addRuleModal" tabindex="-1" role="dialog"
+     aria-labelledby="addRuleLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="addRuleLabel">
+                    添加白名单
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form class="form-horizontal" id="addRuleForm" role="form">
+                    <div class="form-group">
+                        <label for="inputRuleItem" class="col-sm-2 control-label">规则</label>
+                        <div class="col-sm-10 ">
+                            <input type="text" class="form-control" id="inputRuleItem" name="rule" placeholder="规则">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="inputDescriptionItem" class="col-sm-2 control-label">描述</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputDescriptionItem" name="description" placeholder="描述">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="submit" class="btn btn-primary" id="submitRuleButton">
+                    提交更改
+                </button>
+            </div>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->

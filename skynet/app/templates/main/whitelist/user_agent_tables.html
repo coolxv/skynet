@@ -1,0 +1,22 @@
+<thead>
+<tr>
+    <th>规则</th>
+    <th>匹配类型</th>
+    <th>描述</th>
+    <th>创建时间</th>
+    <th>操作</th>
+</tr>
+</thead>
+
+<tbody>
+{% for user_agent_rule in user_agent_rules %}
+    <tr>
+        <td>{{ user_agent_rule.rule }}</td>
+        <td>{{ type[user_agent_rule.type] }}</td>
+        <td>{{ user_agent_rule.description }}</td>
+        <td>{{ user_agent_rule.ctime }}</td>
+        <td><button class="btn btn-link btn-xs center-block delete-rule" value="{{ user_agent_rule.guid }}"><i class="fa fa-trash-o fa-lg"></i>&nbsp删除规则</button></td>
+    </tr>
+{% endfor %}
+
+</tbody>

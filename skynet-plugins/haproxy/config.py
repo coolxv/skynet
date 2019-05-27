@@ -1,0 +1,29 @@
+#coding: utf-8
+from uuid import uuid1
+
+ID = uuid1().get_hex()
+SERVER_URL = "127.0.0.1:5558"
+MQ_ADDR = "127.0.0.1"
+MQ_PUB_RULE_PORT = "5555"
+MQ_REP_MISC_PORT = "5556"
+MQ_REP_STATS_PORT = "5557"
+
+#
+HAPROXY_UNIX_SOCKET_DIR = "/var/vcap/sys/run/haproxy/"
+#
+HAPROXY_FRONTENDS = ["ssl-in","https-in","http-in"]
+HAPROXY_BACKENDS = ["http-routers","tcp-routers"]
+#ACL number
+
+ACL_USER_AGENT_SUB = 10001
+ACL_USER_AGENT_REG = 10002
+
+ACL_REFERRER_SUB = 10003
+ACL_REFERRER_REG = 10004
+
+ACL_URL_SUB = 10005
+ACL_URL_REG = 10006
+
+ACL_USER_AGENT_REG_NEG = 10007
+ACL_REFERRER_REG_NEG = 10008
+ACL_URL_REG_NEG = 10009

@@ -1,0 +1,25 @@
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#user_agent_rule" data-toggle="tab">User-agent</a></li>
+    <li><a href="#referrer_rule" data-toggle="tab">Referrer</a></li>
+    <li><a href="#url_rule" data-toggle="tab">URL</a></li>
+</ul>
+
+<div class="tab-content" style="padding-top: 15px">
+
+    <div class="tab-pane fade in active" id="user_agent_rule">
+        <table id="user_agent_tables" class="table-bordered display">
+            {% include 'main/blacklist/user_agent_tables.html' %}
+        </table>
+    </div>
+    <div class="tab-pane fade" id="referrer_rule">
+        <table id="referrer_tables" class="table-bordered display">
+            {% include 'main/blacklist/referrer_tables.html' %}
+        </table>
+    </div>
+    <div class="tab-pane fade" id="url_rule">
+        <table id="url_tables" class="table-bordered display">
+            {% include 'main/blacklist/url_tables.html' %}
+        </table>
+    </div>
+</div>

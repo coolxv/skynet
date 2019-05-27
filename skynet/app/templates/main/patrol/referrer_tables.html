@@ -1,0 +1,26 @@
+<thead>
+<tr>
+    <th>规则</th>
+    <th>阈值</th>
+    <th>匹配类型</th>
+    <th>自动</th>
+    <th>描述</th>
+    <th>创建时间</th>
+    <th>操作</th>
+</tr>
+</thead>
+
+<tbody>
+{% for refferer_rule in refferer_rules %}
+    <tr>
+        <td>{{ refferer_rule.rule }}</td>
+        <td>{{ refferer_rule.threshold }}</td>
+        <td>{{ type[refferer_rule.type] }}</td>
+        <td>{{ auto[refferer_rule.auto] }}</td>
+        <td>{{ description[refferer_rule.description] }}</td>
+        <td>{{ refferer_rule.ctime }}</td>
+        <td><button class="btn btn-link btn-xs center-block delete-rule" value="{{ refferer_rule.guid }}"><i class="fa fa-trash-o fa-lg"></i>&nbsp删除规则</button></td>
+    </tr>
+{% endfor %}
+</tbody>
+

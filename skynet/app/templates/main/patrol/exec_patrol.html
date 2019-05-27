@@ -1,0 +1,73 @@
+
+{% if exec_status %}
+    <!-- 按钮触发模态框 -->
+    <button class="btn btn-primary btn-md  pull-right" style="margin-right: 10px"  id="stopTasks">停止巡检任务</button>
+{% else %}
+    <!-- 按钮触发模态框 -->
+    <button class="btn btn-primary btn-md  pull-right" style="margin-right: 10px" data-toggle="modal" data-target="#execTasksModal">执行巡检任务</button>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="execTasksModal" tabindex="-1" role="dialog"
+         aria-labelledby="execTasksLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="execTasksLabel">
+                        执行巡检
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <form class="form-horizontal" id="execTasksForm" role="form">
+
+                        <div class="form-group" id="datetimepicker1">
+                            <label for="dtp_input1" class="col-sm-2 control-label">周期时间</label>
+                            <div class="input-group date form_time col-sm-6" data-date-format="hh:ii" data-link-field="dtp_input1" data-link-format="hh:ii">
+                                <input class="form-control"   id="dtp_input1" size="16" type="text" value="" readonly name="time">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                            </div>
+                            <input type="hidden" value="" /><br/>
+                        </div>
+
+
+
+                        <div class="form-group"  id="datetimepicker2">
+                            <label for="dtp_input2" class="col-sm-2 control-label">定期时间</label>
+                            <div class="input-group date form_datetime col-sm-6" data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:ii">
+                                <input class="form-control" id="dtp_input2" size="16" type="text" value="" readonly name="datetime">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                            </div>
+                            <input type="hidden"  value="" /><br/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputSelectItem" class="col-sm-2 control-label">类型</label>
+                            <div class="col-sm-4" style="padding-left: 0px">
+                                <select class="form-control" id="inputSelectItem" name="type">
+                                    <option value ="periodicity"  selected="selected">周期执行</option>
+                                    <option value ="once">定期执行</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="startTasks">
+                        执行
+                    </button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+{% endif %}

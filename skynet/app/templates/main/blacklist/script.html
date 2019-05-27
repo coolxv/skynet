@@ -1,0 +1,167 @@
+<script>
+
+    //初始化相关
+    $(document).ready( function () {
+        ////初始化datatable
+        var user_agent_table = $('#user_agent_tables').DataTable( {
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": true,
+                }],
+        });
+
+        var referrer_table = $('#referrer_tables').DataTable({
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": true,
+                },
+            ]
+        });
+        var url_table = $('#url_tables').DataTable({
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": true,
+                },
+            ]
+        });
+        ////初始化表单字段验证
+        $('#addRuleForm').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                rule: {
+                    message: 'The rule is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'The rule is required and cannot be empty'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 256,
+                            message: 'The rule must be more than 1 and less than 256 characters long'
+                        },
+                    }
+                },
+
+            }
+        });
+        ////upload初始化
+        $("#importFile").fileinput({
+            language: 'zh',
+            uploadUrl: '/api/v1/upload/blacklist/',
+            uploadAsync: false,
+            showUpload: true,
+            showRemove: true,
+            showPreview: true,
+            showCaption:true,
+            showCancel:true,
+            showUploadedThumbs:false,
+            minFileCount: 1,
+            maxFileCount: 3,
+            allowedFileTypes:['text'],
+            allowedPreviewTypes:['text'],
+            allowedFileExtensions : ['txt','csv'],
+        }).on('filebatchuploadsuccess', function(event, files, extra) {
+            console.log('File batch upload success');
+            $('#importFile').delay(2000).queue(function(){
+
+                $('#importFile').fileinput('reset');
+                $('#importFile').fileinput('clear');
+                $(this).dequeue();
+                var category = $(".tab-content .active").attr("id");
+                location.replace(location.href.split("?")[0]+"?category="+category);
+            }) ;
+
+        });
+        $("#importFile").on('filebatchuploaderror', function(event, data) {
+            console.log('File batch upload error');
+        })
+
+        ////初始化页签
+        function getUrlParam(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r!=null) return unescape(r[2]); return null; //返回参数值
+        }
+        type = getUrlParam("category")
+        if(type != ""){
+            select = '.nav.nav-tabs a[href="#'+type+'"]';
+            $(select).tab('show')
+        }
+
+    } );
+
+    //事件响应处理相关
+    $(function() {
+        ////添加黑名单
+        $("button#submitRuleButton").click(function(){
+            if($('#addRuleForm').data('bootstrapValidator').validate().isValid()) {
+                var category = $(".tab-content .active").attr("id");
+                var data = $('#addRuleForm').getFormValueToJson();
+                data.category = category;
+                var req_url = "/api/v1/blacklist/";
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: req_url,
+                    data: JSON.stringify(data),
+                    success: function (msg) {
+                        if(msg.result == "failed"){
+                            alert("操作失败");
+                        }
+                        $('#addRuleModal').modal('hide');
+                        $('#addRuleForm')[0].reset();
+                        var category = $(".tab-content .active").attr("id");
+                        location.replace(location.href.split("?")[0]+"?category="+category);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        {#                        alert(XMLHttpRequest.status);#}
+                        {#                        alert(XMLHttpRequest.readyState);#}
+                        alert("连接失败:"+textStatus);
+                    },
+                });
+            }
+        });
+        ////删除黑名单
+        $(".delete-rule").click(function(){
+            var guid = $(this).attr("value");
+            var req_url = "/api/v1/blacklist/" + guid + "/";
+            $.ajax({
+                type: "DELETE",
+                contentType: "application/json; charset=utf-8",
+                url: req_url,
+                data:JSON.stringify({"guid":guid}),
+                {#                    dataType: "json",#}
+                success: function(msg){
+                    if(msg.result == "failed"){
+                        alert("操作失败");
+                    }
+                    var category = $(".tab-content .active").attr("id");
+                    location.replace(location.href.split("?")[0]+"?category="+category);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    {#                        alert(XMLHttpRequest.status);#}
+                    {#                        alert(XMLHttpRequest.readyState);#}
+                    alert("连接失败:"+textStatus);
+                },
+            });
+        });
+
+        ////下载
+        $("#downloadFile").click(function(){
+            var baseurl = window.location.host;
+            var url =  "http://" + baseurl +"/download/?type=blacklist";
+            window.open(url, "_blank");
+
+        });
+    });
+</script>

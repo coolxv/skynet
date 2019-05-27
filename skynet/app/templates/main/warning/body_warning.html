@@ -1,0 +1,18 @@
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#nonauto_warning" data-toggle="tab">手动阻拦</a></li>
+    <li><a href="#auto_warning" data-toggle="tab">自动阻拦</a></li>
+</ul>
+
+<div class="tab-content" style="padding-top: 15px">
+    <div class="tab-pane fade in active" id="nonauto_warning">
+        <table id="nonauto_warning_tables" class="table-bordered display">
+            {% include 'main/warning/nonauto_warning_tables.html' %}
+        </table>
+    </div>
+    <div class="tab-pane fade" id="auto_warning">
+        <table id="auto_warning_tables" class="table-bordered display">
+            {% include 'main/warning/auto_warning_tables.html' %}
+        </table>
+    </div>
+</div>

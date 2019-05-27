@@ -1,0 +1,24 @@
+<thead>
+<tr>
+    <th>规则</th>
+    <th>描述</th>
+    <th>产生时间</th>
+    <th>上传状态</th>
+    <th>上传时间</th>
+    <th>操作</th>
+</tr>
+</thead>
+
+<tbody>
+{% for auto_warning in auto_warnings %}
+    <tr>
+        <td>{{ auto_warning.rule }}</td>
+        <td>{{ description[auto_warning.description] }}</td>
+        <td>{{ auto_warning.wctime }}</td>
+        <td>{{ active[auto_warning.active] }}</td>
+        <td>{{ auto_warning.actime }}</td>
+        <td><button class="btn btn-link btn-xs center-block delete-warning" value="{{ auto_warning.guid }}"><i class="fa fa-unlock fa-lg"></i>&nbsp解除预警</button></td>
+    </tr>
+{% endfor %}
+
+</tbody>

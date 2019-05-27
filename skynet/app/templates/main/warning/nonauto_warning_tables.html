@@ -1,0 +1,27 @@
+<thead>
+<tr>
+    <th>规则</th>
+    <th>描述</th>
+    <th>产生时间</th>
+    <th>上传状态</th>
+    <th>上传时间</th>
+    <th>操作</th>
+</tr>
+</thead>
+
+<tbody>
+{% for nonauto_warning in nonauto_warnings %}
+    <tr>
+        <td>{{ nonauto_warning.rule }}</td>
+        <td>{{ description[nonauto_warning.description] }}</td>
+        <td>{{ nonauto_warning.wctime }}</td>
+        <td>{{ active[nonauto_warning.active] }}</td>
+        <td>{{ nonauto_warning.actime }}</td>
+        <td style="text-align: center">
+                <button class="btn btn-link btn-xs send-acl" value="{{ nonauto_warning.guid }}"><i class="fa fa-cloud-upload fa-lg"></i>&nbsp上传规则</button>
+                <button class="btn btn-link btn-xs delete-warning" value="{{ nonauto_warning.guid }}"><i class="fa fa-unlock fa-lg"></i>&nbsp解除预警</button>
+        </td>
+    </tr>
+{% endfor %}
+
+</tbody>
