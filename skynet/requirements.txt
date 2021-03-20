@@ -2,7 +2,7 @@
 --index https://pypi.python.org/simple/
 
 Werkzeug==0.10.4
-Jinja2==2.8.0
+Jinja2==2.11.3
 #
 Flask==0.10.1
 Flask-Bootstrap==3.3.5.7
